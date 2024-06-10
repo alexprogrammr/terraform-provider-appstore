@@ -2,10 +2,14 @@ module github.com/alexprogrammr/terraform-provider-appstore
 
 go 1.22
 
-require github.com/hashicorp/terraform-plugin-framework v1.9.0
+require (
+	github.com/alexprogrammr/appstore-go v0.0.0-20240609223641-4c257b16f66a
+	github.com/hashicorp/terraform-plugin-framework v1.9.0
+)
 
 require (
 	github.com/fatih/color v1.13.0 // indirect
+	github.com/golang-jwt/jwt/v5 v5.2.1 // indirect
 	github.com/golang/protobuf v1.5.4 // indirect
 	github.com/hashicorp/go-hclog v1.5.0 // indirect
 	github.com/hashicorp/go-plugin v1.6.0 // indirect
