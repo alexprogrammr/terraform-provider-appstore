@@ -13,3 +13,7 @@ provider "appstore" {
 }
 
 data "appstore_apps" "apps" {}
+
+output "out" {
+  value = data.appstore_apps.apps
+}
