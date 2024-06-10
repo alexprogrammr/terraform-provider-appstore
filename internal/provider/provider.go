@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/provider/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-plugin-log/tflog"
 )
 
 var (
@@ -60,6 +61,8 @@ func (p *appstoreProvider) Schema(_ context.Context, _ provider.SchemaRequest, r
 }
 
 func (p *appstoreProvider) Configure(ctx context.Context, req provider.ConfigureRequest, resp *provider.ConfigureResponse) {
+	tflog.Info(ctx, "Configuring App Store Connect API client")
+
 	config := appstoreProviderModel{}
 	diags := req.Config.Get(ctx, &config)
 
@@ -143,6 +146,13 @@ func (p *appstoreProvider) Configure(ctx context.Context, req provider.Configure
 		return
 	}
 
+	ctx = tflog.SetField(ctx, "key_id", keyID)
+	ctx = tflog.SetField(ctx, "issuer_id", issuerID)
+	ctx = tflog.SetField(ctx, "private_key", privateKey)
+	ctx = tflog.MaskFieldValuesWithFieldKeys(ctx, "private_key")
+
+	tflog.Debug(ctx, "Creating App Store Connect API client")
+
 	source, err := appstore.NewTokenSource(appstore.Config{
 		KeyID:       keyID,
 		IssuerID:    issuerID,
@@ -163,6 +173,8 @@ func (p *appstoreProvider) Configure(ctx context.Context, req provider.Configure
 
 	resp.DataSourceData = client
 	resp.ResourceData = client
+
+	tflog.Info(ctx, "Configured App Store Connect API client")
 }
 
 func (p *appstoreProvider) DataSources(_ context.Context) []func() datasource.DataSource {
