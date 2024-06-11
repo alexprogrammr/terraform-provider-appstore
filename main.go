@@ -10,7 +10,7 @@ import (
 )
 
 //go:generate terraform fmt -recursive ./examples/
-//go:generate tfplugindocs generate -provider-name appstore
+//go:generate go run github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs generate -provider-name appstore
 
 var (
 	version string = "dev"

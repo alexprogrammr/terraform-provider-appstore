@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  pull_request:
+    paths-ignore:
+    - 'README.md'
+  push:
+    paths-ignore:
+    - 'README.md'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup Go
+      uses: actions/setup-go@v5
+      with:
+        go-version-file: go.mod
+        cache: true
+
+    - name: Build
+      run: |
+        go mod download
+        go build -v .
+
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup Go
+      uses: actions/setup-go@v5
+      with:
+        go-version-file: go.mod
+        cache: true
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: '1.8.5'
+        terraform_wrapper: false
+
+    - name: Generate
+      run: go generate ./...
+
+    - name: git diff
+      run: |
+        git diff --compact-summary --exit-code || \
+          (echo; echo "Unexpected difference in directories after code generation. Run 'go generate ./...' command and commit."; exit 1)
