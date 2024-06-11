@@ -57,22 +57,28 @@ func (d *appsDataSource) Configure(_ context.Context, req datasource.ConfigureRe
 
 func (d *appsDataSource) Schema(_ context.Context, _ datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
+		Description: "Fetches the list of apps from the App Store Connect.",
 		Attributes: map[string]schema.Attribute{
 			"apps": schema.ListNestedAttribute{
-				Computed: true,
+				Description: "List of apps",
+				Computed:    true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"id": schema.StringAttribute{
-							Computed: true,
+							Description: "Identifier of the app.",
+							Computed:    true,
 						},
 						"name": schema.StringAttribute{
-							Computed: true,
+							Description: "Name of the app.",
+							Computed:    true,
 						},
 						"bundle_id": schema.StringAttribute{
-							Computed: true,
+							Description: "Bundle identifier of the app.",
+							Computed:    true,
 						},
 						"sku": schema.StringAttribute{
-							Computed: true,
+							Description: "Stock keeping unit of the app.",
+							Computed:    true,
 						},
 					},
 				},

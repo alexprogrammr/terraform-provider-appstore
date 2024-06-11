@@ -9,6 +9,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/providerserver"
 )
 
+//go:generate terraform fmt -recursive ./examples/
+//go:generate tfplugindocs generate -provider-name appstore
+
 var (
 	version string = "dev"
 )

@@ -45,14 +45,20 @@ func (p *appstoreProvider) Metadata(_ context.Context, _ provider.MetadataReques
 
 func (p *appstoreProvider) Schema(_ context.Context, _ provider.SchemaRequest, resp *provider.SchemaResponse) {
 	resp.Schema = schema.Schema{
+		Description: "Interact with App Store Connect.",
 		Attributes: map[string]schema.Attribute{
 			"key_id": schema.StringAttribute{
-				Required: true,
+				Description: "Private key ID from App Store Connect, for example, 2X9R4HXF34.",
+				Required:    true,
 			},
 			"issuer_id": schema.StringAttribute{
-				Required: true,
+				Description: "Issuer ID from the API Keys page in App Store Connect, for example, 57246542-96fe-1a63-e053-0824d011072a.",
+				Required:    true,
 			},
 			"private_key": schema.StringAttribute{
+				Description: "PEM-encoded private key from App Store Connect. " +
+					"Keep your API keys secure and private. Don’t share your keys, store keys in a code repository, or include keys in client-side code. " +
+					"If the key becomes lost or compromised, remember to revoke it immediately.",
 				Required:  true,
 				Sensitive: true,
 			},
