@@ -187,6 +187,7 @@ func (p *appstoreProvider) DataSources(_ context.Context) []func() datasource.Da
 	return []func() datasource.DataSource{
 		NewAppsDataSource,
 		NewAppDataSource,
+		NewGameCenterDataSource,
 	}
 }
 
