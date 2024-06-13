@@ -18,6 +18,8 @@ github.com/alexprogrammr/appstore-go v0.0.0-20240609223641-4c257b16f66a h1:6Le+H
 github.com/alexprogrammr/appstore-go v0.0.0-20240609223641-4c257b16f66a/go.mod h1:Dkdfm+07cEf+tYvjaEoeS5jo5ehZcvnaSnE49Z9Uw28=
 github.com/alexprogrammr/appstore-go v0.0.0-20240613082216-ac164d406a93 h1:+kjbNGMtBJq4zVTJbyQYbMAE3TB0woTjE/GPMXpSH7w=
 github.com/alexprogrammr/appstore-go v0.0.0-20240613082216-ac164d406a93/go.mod h1:Dkdfm+07cEf+tYvjaEoeS5jo5ehZcvnaSnE49Z9Uw28=
+github.com/alexprogrammr/appstore-go v0.0.0-20240613202944-3356aa617004 h1:1j4/AfJKt0JKTDq/yiYgZ8MlTihPtGQzQGY0fnV28Vo=
+github.com/alexprogrammr/appstore-go v0.0.0-20240613202944-3356aa617004/go.mod h1:Dkdfm+07cEf+tYvjaEoeS5jo5ehZcvnaSnE49Z9Uw28=
 github.com/apparentlymart/go-textseg/v15 v15.0.0 h1:uYvfpb3DyLSCGWnctWKGj857c6ew1u1fNQOlOtuGxQY=
 github.com/apparentlymart/go-textseg/v15 v15.0.0/go.mod h1:K8XmNZdhEBkdlyDdvbmmsvpAG721bKi0joRfFdHIWJ4=
 github.com/armon/go-radix v1.0.0 h1:F4z6KzEeeQIMeLFa97iZU6vupzoecKdU5TX24SNppXI=

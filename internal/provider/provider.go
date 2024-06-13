@@ -192,5 +192,7 @@ func (p *appstoreProvider) DataSources(_ context.Context) []func() datasource.Da
 }
 
 func (p *appstoreProvider) Resources(_ context.Context) []func() resource.Resource {
-	return nil
+	return []func() resource.Resource{
+		NewAchievementResource,
+	}
 }
