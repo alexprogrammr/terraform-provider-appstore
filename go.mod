@@ -3,7 +3,7 @@ module github.com/alexprogrammr/terraform-provider-appstore
 go 1.22
 
 require (
-	github.com/alexprogrammr/appstore-go v0.0.0-20240609223641-4c257b16f66a
+	github.com/alexprogrammr/appstore-go v0.0.0-20240613082216-ac164d406a93
 	github.com/hashicorp/terraform-plugin-docs v0.19.4
 	github.com/hashicorp/terraform-plugin-framework v1.9.0
 	github.com/hashicorp/terraform-plugin-log v0.9.0

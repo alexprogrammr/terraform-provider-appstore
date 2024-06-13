@@ -186,6 +186,7 @@ func (p *appstoreProvider) Configure(ctx context.Context, req provider.Configure
 func (p *appstoreProvider) DataSources(_ context.Context) []func() datasource.DataSource {
 	return []func() datasource.DataSource{
 		NewAppsDataSource,
+		NewAppDataSource,
 	}
 }
 

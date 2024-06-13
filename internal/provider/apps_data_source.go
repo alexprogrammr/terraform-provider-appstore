@@ -16,14 +16,7 @@ var (
 )
 
 type appsDataSourceModel struct {
-	Apps []appsModel `tfsdk:"apps"`
-}
-
-type appsModel struct {
-	ID       types.String `tfsdk:"id"`
-	Name     types.String `tfsdk:"name"`
-	BundleID types.String `tfsdk:"bundle_id"`
-	SKU      types.String `tfsdk:"sku"`
+	Apps []appDataSourceModel `tfsdk:"apps"`
 }
 
 type appsDataSource struct {
@@ -100,7 +93,7 @@ func (d *appsDataSource) Read(ctx context.Context, _ datasource.ReadRequest, res
 	}
 
 	for _, app := range apps {
-		appState := appsModel{
+		appState := appDataSourceModel{
 			ID:       types.StringValue(app.ID),
 			Name:     types.StringValue(app.Attr.Name),
 			SKU:      types.StringValue(app.Attr.SKU),
