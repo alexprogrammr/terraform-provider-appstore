@@ -3,17 +3,17 @@
 page_title: "appstore_achievement Resource - appstore"
 subcategory: ""
 description: |-
-  Interact with Game Center Achievements.
+  Manages game center achievement.
 ---
 
 # appstore_achievement (Resource)
 
-Interact with Game Center Achievements.
+Manages game center achievement.
 
 ## Example Usage
 
 ```terraform
-# Manage App Store Connect achievements.
+# Manage game center achievement.
 resource "appstore_achievement" "test" {
   game_center_id     = "497799835"
   reference_name     = "Example Achievement"

@@ -1,4 +1,4 @@
-# Manage App Store Connect achievements.
+# Manage game center achievement.
 resource "appstore_achievement" "test" {
   game_center_id     = "497799835"
   reference_name     = "Example Achievement"

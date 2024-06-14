@@ -46,7 +46,7 @@ func (d *achievementResource) Configure(ctx context.Context, req resource.Config
 
 func (r *achievementResource) Schema(_ context.Context, _ resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		Description: "Interact with Game Center Achievements.",
+		Description: "Manages game center achievement.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				Description: "Identifier of the achievement.",
