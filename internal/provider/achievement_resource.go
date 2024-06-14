@@ -100,7 +100,7 @@ func (r *achievementResource) Create(ctx context.Context, req resource.CreateReq
 	gameCenter, err := r.client.GetGameCenterByID(ctx, gameCenterId)
 	if err != nil {
 		resp.Diagnostics.AddError(
-			"Unable to Read Game Center",
+			"Failed to read game center",
 			err.Error(),
 		)
 		return
@@ -117,7 +117,7 @@ func (r *achievementResource) Create(ctx context.Context, req resource.CreateReq
 	response, err := r.client.CreateAchievement(ctx, gameCenter, &achievement)
 	if err != nil {
 		resp.Diagnostics.AddError(
-			"Unable to Create Achievement",
+			"Failed to create achievement",
 			err.Error(),
 		)
 		return
@@ -138,7 +138,7 @@ func (r *achievementResource) Read(ctx context.Context, req resource.ReadRequest
 	achievement, err := r.client.GetAchievementByID(ctx, state.ID.ValueString())
 	if err != nil {
 		resp.Diagnostics.AddError(
-			"Unable to Read Achievement",
+			"Failed to read achievement",
 			err.Error(),
 		)
 		return
@@ -167,7 +167,7 @@ func (r *achievementResource) Delete(ctx context.Context, req resource.DeleteReq
 	err := r.client.DeleteAchievementByID(ctx, state.ID.ValueString())
 	if err != nil {
 		resp.Diagnostics.AddError(
-			"Unable to Delete Achievement",
+			"Failed to delete achievement",
 			err.Error(),
 		)
 		return

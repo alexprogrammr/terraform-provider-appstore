@@ -167,7 +167,7 @@ func (p *appstoreProvider) Configure(ctx context.Context, req provider.Configure
 	})
 	if err != nil {
 		resp.Diagnostics.AddError(
-			"Unable to create App Store Connect API client",
+			"Failed to create App Store Connect API client",
 			"An unexpected error occurred when creating the App Store Connect API client. "+
 				"If the error is not clear, please contact the provider developers.\n\n"+
 				"App Store Connect Client Error: "+err.Error(),

@@ -95,7 +95,7 @@ func (r *achievementLocalizationResource) Create(ctx context.Context, req resour
 	achievement, err := r.client.GetAchievementByID(ctx, achievementID)
 	if err != nil {
 		resp.Diagnostics.AddError(
-			"Unable to Read Achievement",
+			"Failed to read achievement",
 			err.Error(),
 		)
 		return
@@ -109,7 +109,7 @@ func (r *achievementLocalizationResource) Create(ctx context.Context, req resour
 	})
 	if err != nil {
 		resp.Diagnostics.AddError(
-			"Unable to Create Achievement Localization",
+			"Failed to create achievement localization",
 			err.Error(),
 		)
 		return
@@ -130,7 +130,7 @@ func (r *achievementLocalizationResource) Read(ctx context.Context, req resource
 	localization, err := r.client.GetAchievementLocalizationByID(ctx, state.ID.ValueString())
 	if err != nil {
 		resp.Diagnostics.AddError(
-			"Unable to Read Achievement Localization",
+			"Failed to read achievement localization",
 			err.Error(),
 		)
 		return
@@ -158,7 +158,7 @@ func (r *achievementLocalizationResource) Delete(ctx context.Context, req resour
 	err := r.client.DeleteAchievementLocalizationByID(ctx, state.ID.ValueString())
 	if err != nil {
 		resp.Diagnostics.AddError(
-			"Unable to Delete Achievement Localization",
+			"Failed to aelete achievement localization",
 			err.Error(),
 		)
 		return

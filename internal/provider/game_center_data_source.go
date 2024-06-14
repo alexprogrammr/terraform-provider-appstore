@@ -85,7 +85,7 @@ func (d *gameCenterDataSource) Read(ctx context.Context, req datasource.ReadRequ
 	app, err := d.client.GetApp(ctx, appId)
 	if err != nil {
 		resp.Diagnostics.AddError(
-			"Unable to Read App",
+			"Failed to read app",
 			err.Error(),
 		)
 		return
@@ -94,7 +94,7 @@ func (d *gameCenterDataSource) Read(ctx context.Context, req datasource.ReadRequ
 	gameCenter, err := d.client.GetGameCenter(ctx, app)
 	if err != nil {
 		resp.Diagnostics.AddError(
-			"Unable to Read Game Center",
+			"Failed to read game center",
 			err.Error(),
 		)
 		return

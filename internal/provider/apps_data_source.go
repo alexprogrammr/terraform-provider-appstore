@@ -86,7 +86,7 @@ func (d *appsDataSource) Read(ctx context.Context, _ datasource.ReadRequest, res
 	apps, err := d.client.ListApps(ctx)
 	if err != nil {
 		resp.Diagnostics.AddError(
-			"Unable to Read Apps",
+			"Failed to read apps",
 			err.Error(),
 		)
 		return
