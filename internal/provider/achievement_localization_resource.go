@@ -52,6 +52,9 @@ func (r *achievementLocalizationResource) Schema(_ context.Context, _ resource.S
 			"id": schema.StringAttribute{
 				Description: "Identifier of the achievement localization.",
 				Computed:    true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
 			"achievement_id": schema.StringAttribute{
 				Description: "Identifier of the achievement to associate the localization with. Resource will be re-created if this value is changed.",
@@ -153,6 +156,28 @@ func (r *achievementLocalizationResource) Read(ctx context.Context, req resource
 }
 
 func (r *achievementLocalizationResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
+	plan := achievementLocalizationResourceModel{}
+
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	_, err := r.client.UpdateAchievementLocalization(ctx, appstore.AchievementLocalizationUpdate{
+		ID:                      plan.ID.ValueString(),
+		Name:                    plan.Name.ValueString(),
+		BeforeEarnedDescription: plan.BeforeEarned.ValueString(),
+		AfterEarnedDescription:  plan.AfterEarned.ValueString(),
+	})
+	if err != nil {
+		resp.Diagnostics.AddError(
+			"Failed to update achievement localization",
+			err.Error(),
+		)
+		return
+	}
+
+	resp.Diagnostics.Append(resp.State.Set(ctx, &plan)...)
 }
 
 func (r *achievementLocalizationResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {

@@ -53,6 +53,9 @@ func (r *achievementResource) Schema(_ context.Context, _ resource.SchemaRequest
 			"id": schema.StringAttribute{
 				Description: "Identifier of the achievement.",
 				Computed:    true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
 			"game_center_id": schema.StringAttribute{
 				Description: "Identifier of the game center to associate the achievement with. Resource will be re-created if this value is changed.",
@@ -162,6 +165,29 @@ func (r *achievementResource) Read(ctx context.Context, req resource.ReadRequest
 }
 
 func (r *achievementResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
+	plan := achievementResourceModel{}
+
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	_, err := r.client.UpdateAchievement(ctx, appstore.AchievementUpdate{
+		ID:               plan.ID.ValueString(),
+		ReferenceName:    plan.ReferenceName.ValueString(),
+		Points:           int(plan.Points.ValueInt64()),
+		Repeatable:       plan.Repeatable.ValueBool(),
+		ShowBeforeEarned: plan.ShowBeforeEarned.ValueBool(),
+	})
+	if err != nil {
+		resp.Diagnostics.AddError(
+			"Failed to update achievement",
+			err.Error(),
+		)
+		return
+	}
+
+	resp.Diagnostics.Append(resp.State.Set(ctx, &plan)...)
 }
 
 func (r *achievementResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
