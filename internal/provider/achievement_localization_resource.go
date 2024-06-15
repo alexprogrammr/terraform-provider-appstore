@@ -6,6 +6,8 @@ import (
 	"github.com/alexprogrammr/appstore-go"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 )
 
@@ -52,12 +54,18 @@ func (r *achievementLocalizationResource) Schema(_ context.Context, _ resource.S
 				Computed:    true,
 			},
 			"achievement_id": schema.StringAttribute{
-				Description: "Identifier of the achievement to associate the localization with.",
+				Description: "Identifier of the achievement to associate the localization with. Resource will be re-created if this value is changed.",
 				Required:    true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.RequiresReplace(),
+				},
 			},
 			"locale": schema.StringAttribute{
-				Description: "Locale of the achievement localization.",
+				Description: "Locale of the achievement localization. Resource will be re-created if this value is changed.",
 				Required:    true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.RequiresReplace(),
+				},
 			},
 			"name": schema.StringAttribute{
 				Description: "Name of the achievement.",

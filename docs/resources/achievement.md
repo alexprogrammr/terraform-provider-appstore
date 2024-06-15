@@ -29,12 +29,12 @@ resource "appstore_achievement" "test" {
 
 ### Required
 
-- `game_center_id` (String) Identifier of the game center to associate the achievement with.
+- `game_center_id` (String) Identifier of the game center to associate the achievement with. Resource will be re-created if this value is changed.
 - `points` (Number) The points that each achievement is worth.
 - `reference_name` (String) An internal name of the achievement.
 - `repeatable` (Boolean) An indication of whether the player can earn the achievement multiple times.
 - `show_before_earned` (Boolean) An indication of whether the achievement is visible to the player before it is earned.
-- `vendor_id` (String) A chosen alphanumeric identifier of the achievement.
+- `vendor_id` (String) A chosen alphanumeric identifier of the achievement. Resource will be re-created if this value is changed.
 
 ### Read-Only
 

@@ -28,10 +28,10 @@ resource "appstore_achievement_localization" "en-US" {
 
 ### Required
 
-- `achievement_id` (String) Identifier of the achievement to associate the localization with.
+- `achievement_id` (String) Identifier of the achievement to associate the localization with. Resource will be re-created if this value is changed.
 - `after_earned_description` (String) Description of the achievement after it is earned.
 - `before_earned_description` (String) Description of the achievement before it is earned.
-- `locale` (String) Locale of the achievement localization.
+- `locale` (String) Locale of the achievement localization. Resource will be re-created if this value is changed.
 - `name` (String) Name of the achievement.
 
 ### Read-Only

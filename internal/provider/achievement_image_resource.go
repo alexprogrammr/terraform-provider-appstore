@@ -54,15 +54,21 @@ func (r *achievementImageResource) Schema(_ context.Context, _ resource.SchemaRe
 				Computed:    true,
 			},
 			"achievement_localization_id": schema.StringAttribute{
-				Description: "Identifier of the achievement localization to associate the image with.",
+				Description: "Identifier of the achievement localization to associate the image with. Resource will be re-created if this value is changed.",
 				Required:    true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.RequiresReplace(),
+				},
 			},
 			"file": schema.StringAttribute{
-				Description: "Path to the image file.",
+				Description: "Path to the image file. Resource will be re-created if this value is changed.",
 				Required:    true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.RequiresReplace(),
+				},
 			},
 			"checksum": schema.StringAttribute{
-				Description: "MD5 checksum of the image.",
+				Description: "MD5 checksum of the image. Resource will be re-created if this value is changed.",
 				Computed:    true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -139,6 +145,13 @@ func (r *achievementImageResource) Read(ctx context.Context, req resource.ReadRe
 		return
 	}
 
+	file := state.File.ValueString()
+	if _, err := os.Stat(file); os.IsNotExist(err) {
+		state.File = types.StringValue("")
+		resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
+		return
+	}
+
 	image, err := os.ReadFile(state.File.ValueString())
 	if err != nil {
 		resp.Diagnostics.AddError(
@@ -150,9 +163,9 @@ func (r *achievementImageResource) Read(ctx context.Context, req resource.ReadRe
 
 	if state.Checksum.ValueString() != checksum(image) {
 		state.File = types.StringValue("")
+		resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
+		return
 	}
-
-	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
 }
 
 func (r *achievementImageResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {

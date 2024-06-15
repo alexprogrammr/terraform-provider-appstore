@@ -6,6 +6,8 @@ import (
 	"github.com/alexprogrammr/appstore-go"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 )
 
@@ -53,16 +55,22 @@ func (r *achievementResource) Schema(_ context.Context, _ resource.SchemaRequest
 				Computed:    true,
 			},
 			"game_center_id": schema.StringAttribute{
-				Description: "Identifier of the game center to associate the achievement with.",
+				Description: "Identifier of the game center to associate the achievement with. Resource will be re-created if this value is changed.",
 				Required:    true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.RequiresReplace(),
+				},
 			},
 			"reference_name": schema.StringAttribute{
 				Description: "An internal name of the achievement.",
 				Required:    true,
 			},
 			"vendor_id": schema.StringAttribute{
-				Description: "A chosen alphanumeric identifier of the achievement.",
+				Description: "A chosen alphanumeric identifier of the achievement. Resource will be re-created if this value is changed.",
 				Required:    true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.RequiresReplace(),
+				},
 			},
 			"points": schema.Int64Attribute{
 				Description: "The points that each achievement is worth.",

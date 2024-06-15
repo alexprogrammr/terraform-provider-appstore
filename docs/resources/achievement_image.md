@@ -25,10 +25,10 @@ resource "appstore_achievement_image" "en-US" {
 
 ### Required
 
-- `achievement_localization_id` (String) Identifier of the achievement localization to associate the image with.
-- `file` (String) Path to the image file.
+- `achievement_localization_id` (String) Identifier of the achievement localization to associate the image with. Resource will be re-created if this value is changed.
+- `file` (String) Path to the image file. Resource will be re-created if this value is changed.
 
 ### Read-Only
 
-- `checksum` (String) MD5 checksum of the image.
+- `checksum` (String) MD5 checksum of the image. Resource will be re-created if this value is changed.
 - `id` (String) Identifier of the achievement image.
