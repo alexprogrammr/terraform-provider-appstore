@@ -195,5 +195,6 @@ func (p *appstoreProvider) Resources(_ context.Context) []func() resource.Resour
 	return []func() resource.Resource{
 		NewAchievementResource,
 		NewAchievementLocalizationResource,
+		NewAchievementImageResource,
 	}
 }
